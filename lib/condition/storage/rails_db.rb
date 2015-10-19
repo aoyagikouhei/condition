@@ -14,7 +14,8 @@ module Condition
       def all(param_item)
         sql = "SELECT * FROM #{param_item.name}"
         res = exec(sql)
-        res.to_hash
+        #res.to_hash
+        convert_keys(res)
       end
 
       def delete(param_item)
@@ -52,12 +53,21 @@ module Condition
 
       private
         def quote_value(val)
+          return 'NULL' if val.nil?
           v = val.gsub(/'/, "''")
           "'#{v}'"
         end
 
         def exec(sql)
           @conn.exec_query(sql, LOG_NAME, [])
+        end
+
+        def convert_keys(ary)
+          res = []
+          ary.each do |row|
+            res.push(row.deep_symbolize_keys)
+          end
+          res
         end
     end
   end

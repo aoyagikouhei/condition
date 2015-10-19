@@ -30,6 +30,9 @@ TODO: Write usage instructions here
 
 ## Changes
 
+2015-10-19 0.0.30
+modify activerocerd storage
+
 2014-08-19 0.0.29
 add activerecord storage
 
